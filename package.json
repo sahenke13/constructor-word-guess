@@ -1,0 +1,25 @@
+{
+  "name": "constructor-word-guess",
+  "version": "1.0.0",
+  "description": "A constructor word guess game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahenke13/constructor-word-guess.git"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "Steven A Henke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sahenke13/constructor-word-guess/issues"
+  },
+  "homepage": "https://github.com/sahenke13/constructor-word-guess#readme",
+  "dependencies": {
+    "inquirer": "^6.2.0"
+  }
+}

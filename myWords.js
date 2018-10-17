@@ -1,0 +1,5 @@
+[
+    "hungry",
+    "apples",
+    "oranges"
+]

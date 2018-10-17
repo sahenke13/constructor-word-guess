@@ -1,3 +1,8 @@
+
+// var array = ['s', 'a', 'd']
+
+
+
 const Letter = function(letter){
     this.letter = letter;
     this.guessed = false;
@@ -10,11 +15,25 @@ const Letter = function(letter){
         return this.letter;
     }
     this.updateGuessed = function(char){
-        if(this.letter = char){
+       if(char == this.letter){
             this.guessed = true;
-        }
+       }
+        
     }
    
 }
+
+
+
+// for( i in array){
+//     var letter = new Letter(array[i]);
+//     // console.log(letter)
+//     console.log(letter.updateGuessed('s'))
+
+//     console.log(letter.updateChar(array[i]));
+//     console.log(letter)
+// }
+
+
 
 module.exports = Letter;
