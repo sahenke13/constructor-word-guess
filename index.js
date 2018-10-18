@@ -4,7 +4,7 @@ var inquirer = require("inquirer");
 
 // Bring in Word and Letter Constructors to build game play
 
-var word = require('./Word');
+var Word = require('./Word');
 var Letter = require('./Letter');
 
 // create a word Bank
@@ -17,17 +17,71 @@ function randWord(words){
         return random;
         }   
 
-        var randomWord = randWord(wordBank);
-        console.log(randomWord)
+        // var randomWord = randWord(wordBank);
 
-inquirer.prompt([
-    {
-        type: "input",
-        message: "What is your Guess?",
-        name: "yourGuess"
+var currentWord = new Word(randWord(wordBank));
+
+   
+function gamePlay(){
+            // var wrongGuess = 0;
+           
+            console.log(currentWord.word);
+            // console.log(currentWord.hiddenWord());
+            var hideWord = currentWord.hiddenWord();
+            console.log(hideWord);
+
+
+        inquirer.prompt([
+            {
+                type: "input",
+                message: "What is your Guess?",
+                name: "yourGuess"
+            }
+        ]).then(answers=>{
+            
+            charGuess = answers.yourGuess;
+           
+        
+            for (let i in currentWord.word){  
+               
+                var letter = new Letter (currentWord.word[i]);
+                console.log(letter.letter);
+                
+                
+                // console.log(letter.hiddenLetter);
+                //  console.log(hiddenLetter.letter);
+               
+                if (charGuess == currentWord.word[i]){
+            
+                    letter.updateGuessed();
+                    letter.updateChar(currentWord.word[i]);
+                    console.log(currentWord.word[i]);
+                    // letter.updateChar(hiddenLetter)
+                    // console.log(hiddenWord)
+                  
+                    
+
+                    // console.log("current Letter: " + currentWord.word[i]);
+                    console.log("good job chap");
+                    
+                }
+                else{
+                    console.log("try again");
+                    letter.updateChar(currentWord.word[i]);
+                   
+                }
+                console.log(hideWord)
+            }
+        });
+      
     }
-]).then(answers =>{
-    char = answers.yourGuess;
-    console.log(char);
-})
+
+ gamePlay();
+
+
+
+
+
+
+
 

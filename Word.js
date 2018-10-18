@@ -1,4 +1,4 @@
-var Letter = require('./Letter');
+// var Letter = require('./Letter');
 
 
 
@@ -11,10 +11,12 @@ var newWord = "";
 
 const Word = function(word){
     this.word = word;
+    this.length = word.length;
     this.wordArr = word.split("");
+    
     this.hiddenWord = function(){
         for(let i in this.wordArr){
-            this.wordArr[i]="-";
+            this.wordArr[i]=" _ ";
             newWord += this.wordArr[i];
         }
          return newWord    
