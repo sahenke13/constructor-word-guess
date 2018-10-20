@@ -1,39 +1,38 @@
-// var Letter = require('./Letter');
+var Letter = require('./Letter');
 
 
-
-
-//intialize newWord, which is hidden random word
-
-var newWord = "";
 
 // Word Constructor
 
-const Word = function(word){
+ function Word (word){
     this.word = word;
-    this.length = word.length;
-    this.wordArr = word.split("");
-    
-    this.hiddenWord = function(){
-        for(let i in this.wordArr){
-            this.wordArr[i]=" _ ";
-            newWord += this.wordArr[i];
+    this.wordArr = this.word.split("");
+    this.numChar = this.word.length;
+    this.letterArr = [];
+    this.wordLetters = function(newWordArr){
+        for(let i in newWordArr){
+           let letter = new Letter(newWordArr[i]);
+           this.letterArr.push(letter);
         }
-         return newWord    
+        
+        return this.letterArr;
     }
+    this.userGuess = function(guess){
+        for (let i in this.letterArr){
+            this.letterArr[i].updateGuess(guess)
+        }
     }
-
-
+    this.updatedWord = function(letterArr){
+        for (let i in letterArr){
+        let someletter = new Letter(newWordArr[i]);
+        this.letterArr.updateChar(letterArr[i]);
+        // letter.updateGuess(this.letter)
+        
+        }
+        return letterArr;
+    }
+ }
 
 
 module.exports = Word;
 
-         
-// for( i in array){
-//     var letter = new Letter(array[i]);
-//     // console.log(letter)
-//     console.log(letter.updateGuessed('s'))
-
-//     console.log(letter.updateChar(array[i]));
-//     console.log(letter)
-// }

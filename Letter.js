@@ -1,42 +1,26 @@
 
-// var array = ['s', 'a', 'd']
 
 
-
-const Letter = function(letter){
+function Letter (letter){
+    
     this.letter = letter;
     this.guessed = false;
-    this.updateChar = function(letter){
+    this.updateChar = function(){
         console.log("Guess " + this.guessed);
         if(this.guessed == true){
-            this.letter = letter;
-            console.log("correctGuess")
-            console.log(letter)
+            return this.letter;
+            
         }else{
-            this.letter = "_";
+            return "*";
         }
         
-        console.log("current letter: " + letter);
-        return this.letter;
     }
-    this.updateGuessed = function(){ 
+    this.updateGuess = function(userGuess){ 
+        if(userGuess == this.letter)
             this.guessed = true;
             console.log("update Guess has run")
          
     }
 }
-
-
-
-// for( i in array){
-//     var letter = new Letter(array[i]);
-//     // console.log(letter)
-//     console.log(letter.updateGuessed('s'))
-
-//     console.log(letter.updateChar(array[i]));
-//     console.log(letter)
-// }
-
-
 
 module.exports = Letter;
