@@ -10,23 +10,24 @@ const wordBank = [ 'test', 'constructor', 'javascript', 'php', 'html', 'mysql', 
 
 // intialize variables
 
-let correctCount = 0;
+
 let theWord;
 
 //generater random word funciton
-function randWord(){
+const randWord = () => {
         let random = wordBank[Math.floor(Math.random()*wordBank.length)];
         let currentWord = random;
         return currentWord;
         }   
 
 
-function begin (){
+const begin = () => {
     console.log("Welcome to Coder Constructor Word Guess, May the Odds ever be in your favor!");
     console.log("All words are coding related")
 
 }
 
+//Function which will contain our inquirer prompt with recursion
 const askForLetter = (theWordLetterArr) => {
     inquirer.prompt([
         {
@@ -35,30 +36,28 @@ const askForLetter = (theWordLetterArr) => {
             name: "yourGuess"
         }
     ]).then(answers=>{
-        
-        charGuess = answers.yourGuess;
+        //set charGuess to answer
+        let charGuess = answers.yourGuess;
         theWord.userGuess(charGuess);
-        console.log("CharGuess: ", charGuess)
+
         hidenWord = theWord.updatedWord(theWordLetterArr)
-        console.log("hidenWord: ", hidenWord)
-       if (hidenWord.indexOf("*")!== -1){       
+        console.log("hidenWord: ", hidenWord.join(" "))
+       if (hidenWord.indexOf("*") !== -1){       
             askForLetter(theWordLetterArr)
        } else{
             gamePlay();
             console.log("Next Word")
-       }
-       console.log(hidenWord.indexOf("*"))
-      
+       }theWord      
     })
 }
 
 
-function gamePlay(){
+const gamePlay = () => {
     begin();
 
     //get a random word and name currentWord
     let currentWord = randWord();
-    console.log("____currentword: ", currentWord); 
+
    //create a Word Object called theWord
     theWord = new Word(currentWord);
 
@@ -67,9 +66,11 @@ function gamePlay(){
     console.log("theWordArr: ", theWordArr);
     let theWordLetterArr = theWord.letterArr;
 
-    console.log("theWord.letterArr: ", theWordLetterArr)
+    // console.log("theWord.letterArr: ", theWordLetterArr)
     let hidenWord = theWord.updatedWord(theWordLetterArr);
-    console.log("updated word: " , hidenWord);
+    console.log("hidenWord: " , hidenWord.join(" "));
+
+    //run function containing inquirer prompt
     askForLetter(theWordLetterArr);
     
 
