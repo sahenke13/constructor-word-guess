@@ -6,19 +6,20 @@ const Word = require('./Word.js');
 // Bring in Word and Letter Constructors to build game play
 
 // create a word Bank
-const wordBank = [ 'test', 'constructor', 'javascript', 'php', 'html', 'mysql', 'node', 'animal', 'table']
+const wordBank = ['test', 'constructor', 'ruby', 'javascript', 'php', 'html', 'mysql', 'node', 'animal', 'table']
 
 // intialize variables
 
 
 let theWord;
+let pickedWords = [];
 
 //generater random word funciton
 const randWord = () => {
-        let random = wordBank[Math.floor(Math.random()*wordBank.length)];
-        let currentWord = random;
-        return currentWord;
-        }   
+    let random = wordBank[Math.floor(Math.random() * wordBank.length)];
+    let currentWord = random;
+    return currentWord;
+}
 
 
 const begin = () => {
@@ -35,31 +36,49 @@ const askForLetter = (theWordLetterArr) => {
             message: "What is your Guess?",
             name: "yourGuess"
         }
-    ]).then(answers=>{
+    ]).then(answers => {
         //set charGuess to answer
         let charGuess = answers.yourGuess;
         theWord.userGuess(charGuess);
 
         hidenWord = theWord.updatedWord(theWordLetterArr)
         console.log("hidenWord: ", hidenWord.join(" "))
-       if (hidenWord.indexOf("*") !== -1){       
+        if (hidenWord.indexOf("*") !== -1) {
             askForLetter(theWordLetterArr)
-       } else{
-            gamePlay();
-            console.log("Next Word")
-       }theWord      
-    })
+        } else {
+            console.log("Next Word");
+            return gamePlay();
+
+        }
+    }) 
+}
+
+const pickAWord = () => {
+    let currentWord = randWord();
+
+    if (pickedWords.indexOf(currentWord) === -1) {
+        pickedWords.push(currentWord);
+        console.log("PickedWords: ", pickedWords);
+        return currentWord;
+    }
+    else if (pickedWords.length === wordBank.length) {
+         return console.log("Game Over");
+    }
+    else {
+        return pickAWord();
+    }
 }
 
 
 const gamePlay = () => {
+    
     begin();
-
+    
     //get a random word and name currentWord
-    let currentWord = randWord();
+    let curWord = pickAWord();
 
-   //create a Word Object called theWord
-    theWord = new Word(currentWord);
+    //create a Word Object called theWord
+    theWord = new Word(curWord)
 
     let theWordArr = theWord.wordArr;
     theWord.addLetters(theWordArr);
@@ -68,15 +87,15 @@ const gamePlay = () => {
 
     // console.log("theWord.letterArr: ", theWordLetterArr)
     let hidenWord = theWord.updatedWord(theWordLetterArr);
-    console.log("hidenWord: " , hidenWord.join(" "));
+    console.log("hidenWord: ", hidenWord.join(" "));
 
     //run function containing inquirer prompt
     askForLetter(theWordLetterArr);
-    
 
-    
+
+
 }
- gamePlay();
+gamePlay();
 
 
 
