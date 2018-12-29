@@ -79,10 +79,8 @@ const trackGuesses= (guessesRemaining, anArray, charGuess) => {
     for (let i in anArray){ 
         console.log("theWord letters: ", anArray[i])
         if(charGuess === anArray[i]){
-            console.log("inside if statement")
-            console.log("guessesRemaining inside trackscore: ", guessesRemaining)
+            console.log("inside if statement"
             guessesRemaining++;
-            console.log("guessesRemaining inside trackscore: ", guessesRemaining)
             break;
         }
     }
