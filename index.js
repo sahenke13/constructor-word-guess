@@ -47,17 +47,10 @@ const askForLetter = (theWordLetterArr) => {
         
         hidenWord = theWord.updatedWord(theWordLetterArr);
         //Remove a guess from guesses Remaining.  Then check to see if guess was correct.  If so, add one back.
-        guessesRemaining--;
-
-        for (let i in theWord.wordArr){
-            console.log("theWord letters: ")
-            if(charGuess === theWord.wordArr[i]){
-                console.log("inside if statement")
-                guessesRemaining++;
-                break;
-            }
-        }
-
+       
+        
+       guessesRemaining = trackScore(guessesRemaining, theWord.wordArr, charGuess);
+       
         console.log("\nGuesses Remaining: ", guessesRemaining);
         console.log("\nthidenWord: ", hidenWord.join(" "))
         if (hidenWord.indexOf("*") !== -1) {
@@ -68,6 +61,25 @@ const askForLetter = (theWordLetterArr) => {
             return gamePlay();
         }
     }) 
+}
+
+const trackScore = (guessesRemaining, anArray, charGuess) => {
+    guessesRemaining--;
+
+    for (let i in anArray){
+        
+        console.log("theWord letters: ", anArray[i])
+        if(charGuess === anArray[i]){
+            console.log("inside if statement")
+            console.log("guessesRemaining inside trackscore: ", guessesRemaining)
+            guessesRemaining++;
+            console.log("guessesRemaining inside trackscore: ", guessesRemaining)
+            break;
+        }
+
+    }
+    
+    return guessesRemaining;
 }
 
 const pickAWord = () => {
