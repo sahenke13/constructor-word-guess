@@ -20,7 +20,11 @@ const randWord = () => {
     let random = wordBank[Math.floor(Math.random() * wordBank.length)];
     let currentWord = random;
     return currentWord;
-}
+};
+
+console.log("this is so cool.  I am doing pretty well and learning a lot.  I actually can't believe how far I am getting.  Good for me. ");
+
+
 
 
 const begin = () => {
@@ -49,8 +53,14 @@ const askForLetter = (theWordLetterArr) => {
         //Remove a guess from guesses Remaining.  Then check to see if guess was correct.  If so, add one back.
        
         
-       guessesRemaining = trackScore(guessesRemaining, theWord.wordArr, charGuess);
+       guessesRemaining = trackGuesses(guessesRemaining, theWord.wordArr, charGuess);
        
+       if(guessesRemaining === 0 ){
+        console.log("Game Over, you have no remaining Guesses");
+        console.log("Game has reset");
+        guessesRemaining = 7;
+        pickedWords = [];
+       }
         console.log("\nGuesses Remaining: ", guessesRemaining);
         console.log("\nthidenWord: ", hidenWord.join(" "))
         if (hidenWord.indexOf("*") !== -1) {
@@ -63,11 +73,10 @@ const askForLetter = (theWordLetterArr) => {
     }) 
 }
 
-const trackScore = (guessesRemaining, anArray, charGuess) => {
+//track score function tracks the remainGuesses, should probably rename trackGuesses
+const trackGuesses= (guessesRemaining, anArray, charGuess) => {
     guessesRemaining--;
-
-    for (let i in anArray){
-        
+    for (let i in anArray){ 
         console.log("theWord letters: ", anArray[i])
         if(charGuess === anArray[i]){
             console.log("inside if statement")
@@ -76,9 +85,7 @@ const trackScore = (guessesRemaining, anArray, charGuess) => {
             console.log("guessesRemaining inside trackscore: ", guessesRemaining)
             break;
         }
-
     }
-    
     return guessesRemaining;
 }
 
