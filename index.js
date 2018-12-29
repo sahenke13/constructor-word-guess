@@ -13,6 +13,7 @@ const wordBank = ['test', 'constructor', 'ruby', 'javascript', 'php', 'html', 'm
 
 let theWord;
 let pickedWords = [];
+let guessesRemaining = 7;
 
 //generater random word funciton
 const randWord = () => {
@@ -23,10 +24,12 @@ const randWord = () => {
 
 
 const begin = () => {
+    console.log("--------------------------------------------------------------")
     console.log("Welcome to Coder Constructor Word Guess, May the Odds ever be in your favor!");
     console.log("All words are coding related")
 
 }
+
 
 //Function which will contain our inquirer prompt with recursion
 const askForLetter = (theWordLetterArr) => {
@@ -40,15 +43,29 @@ const askForLetter = (theWordLetterArr) => {
         //set charGuess to answer
         let charGuess = answers.yourGuess;
         theWord.userGuess(charGuess);
+        console.log("the word is: ", theWord.wordArr)
+        
+        hidenWord = theWord.updatedWord(theWordLetterArr);
+        //Remove a guess from guesses Remaining.  Then check to see if guess was correct.  If so, add one back.
+        guessesRemaining--;
 
-        hidenWord = theWord.updatedWord(theWordLetterArr)
-        console.log("hidenWord: ", hidenWord.join(" "))
+        for (let i in theWord.wordArr){
+            console.log("theWord letters: ")
+            if(charGuess === theWord.wordArr[i]){
+                console.log("inside if statement")
+                guessesRemaining++;
+                break;
+            }
+        }
+
+        console.log("\nGuesses Remaining: ", guessesRemaining);
+        console.log("\nthidenWord: ", hidenWord.join(" "))
         if (hidenWord.indexOf("*") !== -1) {
             askForLetter(theWordLetterArr)
+          
         } else {
             console.log("Next Word");
             return gamePlay();
-
         }
     }) 
 }
@@ -62,7 +79,7 @@ const pickAWord = () => {
         return currentWord;
     }
     else if (pickedWords.length === wordBank.length) {
-         return console.log("Game Over");
+         return console.log("\nGame Over");
     }
     else {
         return pickAWord();
@@ -87,7 +104,7 @@ const gamePlay = () => {
 
     // console.log("theWord.letterArr: ", theWordLetterArr)
     let hidenWord = theWord.updatedWord(theWordLetterArr);
-    console.log("hidenWord: ", hidenWord.join(" "));
+    console.log("\nhidenWord: ", hidenWord.join(" "));
 
     //run function containing inquirer prompt
     askForLetter(theWordLetterArr);

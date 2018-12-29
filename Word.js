@@ -1,7 +1,5 @@
 const Letter = require('./Letter.js');
 
-
-
 // Word Constructor
 
 const Word = function Word(word){
@@ -17,8 +15,10 @@ const Word = function Word(word){
         })
         }
     
-    this.userGuess = function(guess){
+    this.userGuess = (guess) => {
+        
         for (let i in this.letterArr){
+            
             this.letterArr[i].updateGuess(guess)
         }
     }
